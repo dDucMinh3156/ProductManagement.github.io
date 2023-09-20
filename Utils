@@ -1,0 +1,142 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+/**
+ *
+ * @author Ta Minh Duc
+ */
+public class Utils {
+
+    //-- case enter empty
+    public static String getString(String welcome) {
+        boolean check = true;
+        String result = "";
+        do {
+            Scanner sc = new Scanner(System.in);
+            System.out.println(welcome);
+            result = sc.nextLine();
+            if (result.isEmpty()) {
+                System.out.println("Input text!!!");
+            } else {
+                check = false;
+            }
+        } while (check);
+        return result;
+    }
+
+    //-- case do not want update
+    //-- case quantity
+    public static int getInt(String welcome, int min, int max) {
+        boolean check = true;
+        int number = 0;
+        do {
+            try {
+                Scanner sc = new Scanner(System.in);
+                System.out.println(welcome);
+                number = sc.nextInt();
+                if (number < min || number > max) {
+                    System.out.println("Need from 0 to 1000");
+                } else {
+                    check = false;
+                }
+            } catch (Exception e) {
+                System.out.println("Input integer number!");
+            }
+        } while (check || number > max || number < min);
+        return number;
+    }
+
+    //-- case unitPrice
+    public static float getFloat(String welcome, float min, float max) {
+        boolean check = true;
+        float number = 0;
+        do {
+            try {
+                Scanner sc = new Scanner(System.in);
+                System.out.println(welcome);
+                number = sc.nextFloat();
+                if (number < min || number > max) {
+                    System.out.println("Need from 0 to 10000");
+                } else {
+                    check = false;
+                }
+            } catch (Exception e) {
+                System.out.println("Input real number!");
+            }
+        } while (check || number > max || number < min);
+        return number;
+    }
+
+    //-- ask do continue
+    public static boolean confirmYesNo(String welcome) {
+        boolean result = false;
+        String confirm = Utils.getString(welcome);
+        if ("Y".equalsIgnoreCase(confirm)) {
+            result = true;
+        }
+        return result;
+    }
+
+    //-- case unitPrice update
+    public static float getFloatUpdate(String welcome, float min, float max) {
+        boolean check = true;
+        float number = 0;
+        String skipUpdate;
+        do {
+            try {
+                Scanner sc = new Scanner(System.in);
+                System.out.println(welcome);
+                skipUpdate = sc.nextLine().trim();
+                if (!Pattern.matches("^.{0,0}$", skipUpdate)) {
+                    number = Float.parseFloat(skipUpdate);
+                    if (number < min || number > max) {
+                        System.out.println("Need from 0 to 10000");
+                    } else {
+                        check = false;
+                    }
+                } else {
+                    check = false;
+                }
+
+            } catch (Exception e) {
+                System.out.println("Input real number!");
+            }
+        } while (check || number > max || number < min);
+        return number;
+    }
+
+    //-- case quantity
+    public static int getIntUpdate(String welcome, int min, int max) {
+        boolean check = true;
+        int number = 0;
+        String skipUpdate;
+        do {
+            try {
+                Scanner sc = new Scanner(System.in);
+                System.out.println(welcome);
+                skipUpdate = sc.nextLine().trim();
+                if (!Pattern.matches("^.{0,0}$", skipUpdate)) {
+                    number = sc.nextInt();
+                    if (number < min || number > max) {
+                        System.out.println("Need from 0 to 1000");
+                    } else {
+                        check = false;
+                    }
+                } else {
+                    check = false;
+                }
+
+            } catch (Exception e) {
+                System.out.println("Input integer number!");
+            }
+        } while (check || number > max || number < min);
+        return number;
+    }
+}
